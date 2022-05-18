@@ -89,5 +89,5 @@ app.get('*',(req,res) => {
 });
 
 app.listen('3002',()=>{
-    console.log("Webserver is running");
+    console.log("Webserver is on");
 })

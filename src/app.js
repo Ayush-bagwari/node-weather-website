@@ -4,6 +4,7 @@ const hbs = require('hbs')
 const request = require('request');
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
+const port = process.env.PORT || 3002;
 
 const app = express();
 const publicDirectoryPath = path.join(__dirname, '../public');
@@ -88,6 +89,6 @@ app.get('*',(req,res) => {
     });
 });
 
-app.listen('3002',()=>{
-    console.log("Webserver is on");
+app.listen(port,()=>{
+    console.log("Webserver is on port" + port);
 })

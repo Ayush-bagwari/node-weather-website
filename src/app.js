@@ -74,7 +74,7 @@ app.get('/help/*',(req,res)=>{
     res.render('404', {
         title:'404',
         name: 'AYUSHBG',
-        errorMessage: 'Help Page Not Foundo'
+        errorMessage: 'Help Page Not Found'
     });
 });
 

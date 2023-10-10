@@ -31,9 +31,9 @@ app.get('/about',(req,res)=>{
 // app.get('',(req,res)=>{
 //     res.send("Hello express");
 // });
-// app.get('/help',(req,res)=>{
-//     res.send("Need beer");
-// });
+app.get('/tuesday',(req,res)=>{
+    res.send("Need beer");
+});
 app.get('/about1',(req,res)=>{
     res.send("abut page");
 });
@@ -74,7 +74,7 @@ app.get('/help/*',(req,res)=>{
     res.render('404', {
         title:'404',
         name: 'AYUSHBG',
-        errorMessage: 'Help Page Not Found'
+        errorMessage: 'Help Page Not Foundo'
     });
 });
 

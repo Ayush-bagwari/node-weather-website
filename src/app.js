@@ -4,16 +4,17 @@ const hbs = require('hbs')
 const request = require('request');
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 3001;
 
 const app = express();
 const publicDirectoryPath = path.join(__dirname, '../public');
+console.log(__dirname);
 const viewsPath = path.join(__dirname, '../templates/views');
 const partialsPath = path.join(__dirname, '../templates/partials');
 app.set('views',viewsPath);
 app.set('view engine', 'hbs');
 //seup static directory to serve
- app.use(express.static(publicDirectoryPath));
+app.use(express.static(publicDirectoryPath));
 hbs.registerPartials(partialsPath);
 app.get('',(req,res)=>{
     res.render("index",{
@@ -27,7 +28,6 @@ app.get('/about',(req,res)=>{
         name: 'AYUSHBG'
     });
 });
-console.log(__dirname);
 // app.get('',(req,res)=>{
 //     res.send("Hello express");
 // });
@@ -45,18 +45,16 @@ app.get('/weather',(req,res)=>{
         }); 
     }else{
         geocode(req.query.address,(error , {latitude, longitude, location} = {}) => {
-        forecast(latitude,longitude ,(error , forecastdata) => {
-        if(error){
-            return res.send({
-                error: error
-            }); 
-        }
-        res.send({
-            data: forecastdata,
-            location
+            forecast(latitude,longitude ,(error , forecastdata) => {
+                if(error){
+                    return res.send({error}); 
+                }
+                res.send({
+                    data: forecastdata,
+                    location
+                });
+            });     
         });
-    });     
-    });
     }
 });
 
@@ -80,7 +78,6 @@ app.get('/help/*',(req,res)=>{
     });
 });
 
-
 app.get('*',(req,res) => {
     res.render('404', {
         title:'404',
@@ -91,4 +88,4 @@ app.get('*',(req,res) => {
 
 app.listen(port,()=>{
     console.log("Webserver is on port" + port);
-})
+});
